@@ -10,7 +10,6 @@ pipeline {
         stage("building"){
             steps{
                 echo "This is for the building stage"
-                echo "failures"
             }
         }
 
