@@ -7,36 +7,33 @@ pipeline {
             }
         }
 
-
-         stage("building"){
+        stage("building"){
             steps{
                 echo "This is for the building stage"
             }
         }
 
-         stage("production"){
+        stage("production"){
             steps{
-                echo "This is for the prduction stage"
+                echo "This is for the production stage"
             }
-    
         }
-        
     }
-    post{
+    post {
         always {
             echo "This runs always"
         }
         success {
-            echo "echo completed successfully"
+            echo "Pipeline completed successfully"
             mail to: 'afeadetutu@gmail.com',
-            subject: "SUCCESS: Pipelne Completed",
-            body: "The pipeline has completed sucessfully."
+                 subject: "SUCCESS: Pipeline Completed",
+                 body: "The pipeline has completed successfully."
         }
-        failure{
-            echo "echo Pipeline failed!"
+        failure {
+            echo "Pipeline failed!"
             mail to: 'afeadetutu@gmail.com',
-            subject: "FAILURE: Pipelne failed",
-            body: "The pipeline failed check the logs."
+                 subject: "FAILURE: Pipeline failed",
+                 body: "The pipeline failed. Check the logs."
         }
     }
 }
