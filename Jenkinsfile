@@ -1,39 +1,58 @@
 pipeline {
     agent any
+
     stages {
-        stage("starting"){
-            steps{
+        stage("starting") {
+            steps {
                 echo "This is for the beginning stage"
             }
         }
 
-        stage("building"){
-            steps{
-                echo "This is for the building stages"
+        stage("building") {
+            steps {
+                echo "This is for the building stage"
+                // Simulate a failure for testing (comment this out in production)
+                error("Simulated build failure")
             }
         }
 
-        stage("production"){
-            steps{
+        stage("production") {
+            steps {
                 echo "This is for the production stage"
             }
         }
     }
+
     post {
         always {
             echo "This runs always"
         }
+
         success {
             echo "Pipeline completed successfully"
-            mail to: 'afeadetutu@gmail.com',
-                 subject: "SUCCESS: Pipeline Completed",
-                 body: "The pipeline has completed successfully."
+            emailext(
+                subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                body: """
+                    <p>The pipeline has completed successfully.</p>
+                    <p>Build URL: ${env.BUILD_URL}</p>
+                """,
+                to: 'afeadetutu@gmail.com', // Replace with the recipient's email
+                attachLog: false // No need to attach logs for success
+            )
         }
+
         failure {
             echo "Pipeline failed!"
-            mail to: 'afeadetutu@gmail.com',
-                 subject: "FAILURE: Pipeline failed",
-                 body: "The pipeline failed. Check the logs."
+            emailext(
+                subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                body: """
+                    <p>The pipeline failed with the following error:</p>
+                    <pre>${currentBuild.currentResult}</pre>
+                    <p>Check the build log for more details: ${env.BUILD_URL}</p>
+                """,
+                to: 'afeadetutu@gmail.com', // Replace with the recipient's email
+                attachLog: true // Attach the build log for debugging
+            )
         }
     }
 }
