@@ -11,8 +11,8 @@ pipeline {
         stage("building") {
             steps {
                 echo "This is for the building stage"
-            
-                error("Stimulated build failure")
+                // Simulate a failure for testing (comment this out in production)
+                error("Simulated build failure")
             }
         }
 
@@ -36,8 +36,8 @@ pipeline {
                     <p>The pipeline has completed successfully.</p>
                     <p>Build URL: ${env.BUILD_URL}</p>
                 """,
-                to: 'afeadetutu@gmail.com',
-                attachLog: false 
+                to: 'afeadetutu@gmail.com', // Replace with the recipient's email
+                attachLog: false // No need to attach logs for success
             )
         }
 
@@ -50,8 +50,8 @@ pipeline {
                     <pre>${currentBuild.currentResult}</pre>
                     <p>Check the build log for more details: ${env.BUILD_URL}</p>
                 """,
-                to: 'afeadetutu@gmail.com', 
-                attachLog: true 
+                to: 'afeadetutu@gmail.com', // Replace with the recipient's email
+                attachLog: true // Attach the build log for debugging
             )
         }
     }
