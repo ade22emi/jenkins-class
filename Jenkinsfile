@@ -1,13 +1,11 @@
 pipeline {
     agent any
-
     stages {
         stage("starting") {
             steps {
                 echo "This is for the beginning stage"
             }
         }
-
         stage("building") {
             steps {
                 echo "This is for the building stage 1"
@@ -22,19 +20,16 @@ pipeline {
                 // }
             }
         }
-
         stage("production") {
             steps {
                 echo "This is for the production stage 1."
             }
         }
     }
-
     post {
         always {
             echo "This runs always"
         }
-
         success {
             echo "Pipeline completed successfully"
             emailext(
