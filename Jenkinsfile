@@ -4,13 +4,13 @@ pipeline {
     //         nodejs "node 18"
     // }
 
-     stages {
-        stage('checkout') {
-            // checkout all files
-            steps{
-                 git "https://github.com/ade22emi/jenkins-class.git"
-            }     
-        }
+    //  stages {
+    //     stage('checkout') {
+    //         // checkout all files
+    //         steps{
+    //              git "https://github.com/ade22emi/jenkins-class.git"
+    //         }     
+    //     }
 
         stage('build') {
 
