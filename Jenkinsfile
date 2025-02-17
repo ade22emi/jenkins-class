@@ -1,6 +1,6 @@
-pipeline{
+pipeline { 
     agent any
-    stages{
+    stages {
         stage("starting") {
             steps {
                 echo "This is for the beginning stage"
@@ -26,7 +26,7 @@ pipeline{
             }
         }
     }
-    post{
+    post {
         always {
             echo "This runs always"
         }
