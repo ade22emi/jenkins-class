@@ -12,32 +12,32 @@ pipeline{
             }     
         }
 
-        stage('build') {
+        // stage('build') {
 
-            // PASSING BRANCH NAME AS A CONDITION
-             when{
-                 expression{
-                    BRANCH_NAME == "master"
-                 }
-             }
-            steps {
+        //     // PASSING BRANCH NAME AS A CONDITION
+        //      when{
+        //          expression{
+        //             BRANCH_NAME == "master"
+        //          }
+        //      }
+        //     steps {
 
-                echo "this is building step."
-                // RUNNING NPM INSTALL AND TESTING WHETHER THE INSTALLTION ACHIEVED
-                script{
-                    try{
-                        sh 'touch build.log'
-                        sh "npm install"
-                        sh "npm run build"
-                        sh "npm run test"
+        //         echo "this is building step."
+        //         // RUNNING NPM INSTALL AND TESTING WHETHER THE INSTALLTION ACHIEVED
+        //         script{
+        //             try{
+        //                 sh 'touch build.log'
+        //                 sh "npm install"
+        //                 sh "npm run build"
+        //                 sh "npm run test"
                        
-                    }catch(Exception err){
-                        echo "error is ${err.getMessage}"
-                        throw err
-                            }
-                    }
-                }
-            }
+        //             }catch(Exception err){
+        //                 echo "error is ${err.getMessage}"
+        //                 throw err
+        //                     }
+        //             }
+        //         }
+        //     }
         stage('Deploy') {
 
             steps {
