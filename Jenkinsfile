@@ -50,16 +50,16 @@ pipeline {
 
         failure {
             echo "Pipeline failed!"
-            // emailext(
-            //     subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-            //     body: """
-            //         <p>The pipeline failed with the following error:</p>
-            //         <pre>${currentBuild.currentResult}</pre>
-            //         <p>Check the build log for more details: ${env.BUILD_URL}</p>
-            //     """,
-            //     to: 'afeadetutu@gmail.com', // Replace with the recipient's email
-            //     attachLog: true // Attach the build log for debugging
-            // )
+            emailext(
+                subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                body: """
+                    <p>The pipeline failed with the following error:</p>
+                    <pre>${currentBuild.currentResult}</pre>
+                    <p>Check the build log for more details: ${env.BUILD_URL}</p>
+                """,
+                to: 'afeadetutu@gmail.com', // Replace with the recipient's email
+                attachLog: true // Attach the build log for debugging
+            )
         }
     }
 }
