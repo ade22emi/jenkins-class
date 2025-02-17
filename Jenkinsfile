@@ -17,7 +17,7 @@ pipeline{
             // PASSING BRANCH NAME AS A CONDITION
              when{
                  expression{
-                    BRANCH_NAME == "testing."
+                    BRANCH_NAME == "master"
                  }
              }
             steps {
@@ -56,9 +56,9 @@ pipeline{
             emailext(
                 subject: "Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}, ${BUILD_NUMBER}  ${JOB_NAME},${env.BUILD_LOG}, ${env.BUILD_URL}",
                 body: "Build Status: ${currentBuild.currentResult}\nCheck the console output at ${env.BUILD_URL}",
-                to: "shopar200@gmail.com",
-                replyTo: "shopar200@gmail.com",
-                from: "adewumibode7@gmail.com"
+                to: "afeadetutu@gmail.com",
+                replyTo: "afeadetutu@gmail.com",
+                from: "afeadetutu@gmail.com"
             )
         }
         failure {
@@ -69,9 +69,9 @@ pipeline{
                         emailext(
                             subject: "Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}, ${env.BUILD_NUMBER}, ${JOB_NAME}, ${build_log},  ${BUILD_URL}",
                             body: "Build Status: ${currentBuild.currentResult}\nCheck the console output at ${env.BUILD_URL}, ${build_log}, ${env.BUILD_NUMBER}",
-                            to: "shopar200@gmail.com",
-                            replyTo: "shopar200@gmail.com",
-                            from: "adewumibode7@gmail.com"
+                            to: "afeadetutu@gmail.com",
+                            replyTo: "afeadetutu@gmail.com",
+                            from: "afeadetutu@gmail.com"
                         )                    
                 }
         }
