@@ -12,14 +12,14 @@ pipeline {
             steps {
                 echo "This is for the building stage"
                 // Simulate a failure for testing (comment this out in production)
-                try{
-                    def value = 10
-                    if( value = 10){
-                        echo "correct"
-                    }else{ echo "erro"}
-                }catch( Exception err){
-                    echo "error : err"
-                }
+                // try{
+                //     def value = 10
+                //     if( value = 10){
+                //         echo "correct"
+                //     }else{ echo "erro"}
+                // }catch( Exception err){
+                //     echo "error : err"
+                // }
             }
         }
 
