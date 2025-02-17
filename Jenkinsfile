@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label "simple" || label "simple_1"
+        any
     }
     stages {
         stage("starting") {
