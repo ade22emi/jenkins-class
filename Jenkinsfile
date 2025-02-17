@@ -10,7 +10,7 @@ pipeline {
 
         stage("building") {
             steps {
-                echo "This is for the building stage"
+                echo "This is for the building stage 1"
                 // Simulate a failure for testing (comment this out in production)
                 // try{
                 //     def value = 10
