@@ -1,60 +1,79 @@
-pipeline { 
+pipeline {
     agent any
-    stages {
-        stage("starting") {
-            steps {
-                echo "This is for the beginning stage"
-            }
-        }
-        stage("building") {
-            steps {
-                echo "This is for the building stage 1"
-                // Simulate a failure for testing (comment this out in production)
-                // try{
-                //     def value = 10
-                //     if( value = 10){
-                //         echo "correct"
-                //     }else{ echo "erro"}
-                // }catch( Exception err){
-                //     echo "error : err"
-                // }
-            }
-        }
-        stage("production") {
-            steps {
-                echo "This is for the production stage 1."
-            }
-        }
+        tools {
+            nodejs "node18"
     }
-    post {
-        always {
-            echo "This runs always"
-        }
-        success {
-            echo "Pipeline completed successfully"
-            emailext(
-                subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-                body: """
-                    <p>The pipeline has completed successfully.</p>
-                    <p>Build URL: ${env.BUILD_URL}</p>
-                """,
-                to: 'afeadetutu@gmail.com', // Replace with the recipient's email
-                attachLog: false // No need to attach logs for success
-            )
+
+     stages {
+        stage('checkout') {
+            checkout all files
+            steps{
+                 git "https://github.com/Oluwaseun186/jenkinsfile.git"
+            }     
         }
 
-        failure {
-            echo "Pipeline failed!"
+        stage('build') {
+
+            // PASSING BRANCH NAME AS A CONDITION
+             when{
+                 expression{
+                    BRANCH_NAME == "testing."
+                 }
+             }
+            steps {
+
+                echo "this is building step."
+                // RUNNING NPM INSTALL AND TESTING WHETHER THE INSTALLTION ACHIEVED
+                script{
+                    try{
+                        sh 'touch build.log'
+                        sh "npm install"
+                        sh "npm run build"
+                        sh "npm run test"
+                       
+                    }catch(Exception err){
+                        echo "error is ${err.getMessage}"
+                        throw err
+                            }
+                    }
+                }
+            }
+        stage('Deploy') {
+
+            steps {
+                echo "this is building step."
+            }
+        }
+      
+    }
+
+    // POST BUILD FOR FAILURE AND SUCCESS OF RUN JOBS
+    post {
+        always {
+            echo "this is just a step.."
+        }
+        success {
             emailext(
-                subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-                body: """
-                    <p>The pipeline failed with the following error:</p>
-                    <pre>${currentBuild.currentResult}</pre>
-                    <p>Check the build log for more details: ${env.BUILD_URL}</p>
-                """,
-                to: 'afeadetutu@gmail.com', // Replace with the recipient's email
-                attachLog: true // Attach the build log for debugging
+                subject: "Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}, ${BUILD_NUMBER}  ${JOB_NAME},${env.BUILD_LOG}, ${env.BUILD_URL}",
+                body: "Build Status: ${currentBuild.currentResult}\nCheck the console output at ${env.BUILD_URL}",
+                to: "shopar200@gmail.com",
+                replyTo: "shopar200@gmail.com",
+                from: "adewumibode7@gmail.com"
             )
+        }
+        failure {
+                script{
+                     //def build_log = currentBuild.rawBuild.getLog(100).join('\n') 
+                     //def build_log = Manager.build.log
+                     def build_log = readFile("build.log")
+                        emailext(
+                            subject: "Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}, ${env.BUILD_NUMBER}, ${JOB_NAME}, ${build_log},  ${BUILD_URL}",
+                            body: "Build Status: ${currentBuild.currentResult}\nCheck the console output at ${env.BUILD_URL}, ${build_log}, ${env.BUILD_NUMBER}",
+                            to: "shopar200@gmail.com",
+                            replyTo: "shopar200@gmail.com",
+                            from: "adewumibode7@gmail.com"
+                        )                    
+                }
         }
     }
 }
