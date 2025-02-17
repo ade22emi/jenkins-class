@@ -18,7 +18,7 @@ pipeline {
 
         stage("production") {
             steps {
-                echo "This is for the production stage 1"
+                echo "This is for the production stage 1."
             }
         }
     }
