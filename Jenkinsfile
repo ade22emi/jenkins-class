@@ -6,7 +6,7 @@ pipeline {
 
      stages {
         stage('checkout') {
-            checkout all files
+            // checkout all files
             steps{
                  git "https://github.com/ade22emi/jenkins-class.git"
             }     
