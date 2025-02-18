@@ -128,7 +128,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'docker build -t ade22emi/jenkins .'
+                sh 'docker build -t kikelomo22/new-image:latest/jenkins .'
 
                 script {
                     try {
