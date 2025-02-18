@@ -7,8 +7,8 @@ pipeline {
 
         stage("Checkout out"){
             steps{
-                git branch: "testing" url: "https://github.com/theoafactor/jenkins_class.git"
-                git branch: "testing", url: "https://github.com/theoafactor/jenkins_class.git"
+                git branch: "testing" url: "https://github.com/ade22emi/jenkins_class.git"
+                git branch: "testing", url: "https://github.com/ade22emi/jenkins_class.git"
             }
         }
 
@@ -62,7 +62,7 @@ pipeline {
                                     ----------------
                                     ${build_log}
                                     """,
-                            to: "theoafactor@gmail.com"
+                            to: "afeadetutu@gmail.com"
 
                 }
 
@@ -79,7 +79,7 @@ pipeline {
                                 ----------------
                                 ${build_log}
                                 """,
-                        to: "theoafactor@gmail.com"
+                        to: "afeadetutu@gmail.com"
 
                     }
 
