@@ -125,11 +125,11 @@ pipeline {
         }
 
         stage('Building') {
-            // when {
-            //     expression {
-            //         return BRANCH_NAME == 'master'  // Ensure we're on the master branch
-            //     }
-            }
+            // // when {
+            // //     expression {
+            // //         return BRANCH_NAME == 'master'  // Ensure we're on the master branch
+            // //     }
+            // }
             steps {
                 // Build the Docker image
                 sh 'sudo docker build -t kikelomo22/new-image:latest/jenkins .'
