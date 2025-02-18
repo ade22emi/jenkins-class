@@ -125,10 +125,10 @@ pipeline {
         }
 
         stage('Building') {
-            when {
-                expression {
-                    return BRANCH_NAME == 'master'  // Ensure we're on the master branch
-                }
+            // when {
+            //     expression {
+            //         return BRANCH_NAME == 'master'  // Ensure we're on the master branch
+            //     }
             }
             steps {
                 // Build the Docker image
