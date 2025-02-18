@@ -128,7 +128,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'docker build -t kikelomo22/jenkins .'
+                sh 'docker build -t ade22emi/jenkins .'
 
                 script {
                     try {
