@@ -7,8 +7,8 @@ pipeline {
 
         stage("Checkout out"){
             steps{
-                git branch: "master" url: "https://github.com/ade22emi/jenkins_class.git"
-                git branch: "master", url: "https://github.com/ade22emi/jenkins_class.git"
+                git branch: "master" url: "https://github.com/ade22emi/jenkins-class.git"
+                git branch: "master", url: "https://github.com/ade22emi/jenkins-class.git"
             }
         }
 
